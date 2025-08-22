@@ -40,7 +40,7 @@ class CarModelForm(forms.ModelForm):
     
     def clean_factory_year(self):
         year = self.cleaned_data.get('factory_year')
-        if year < 2000:
-            self.add_error('factory_year', 'Ano de fabricação deve ser maior que 2000')
+        if year < 1970:
+            self.add_error('factory_year', 'Ano de fabricação deve ser maior que 1970')
 
         return year
