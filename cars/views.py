@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 
 # def cars_view(request):
 #     #cars = Car.objects.all() 
-#     # o ORM do Django busca as inf. no bando. esse comando internamente o Django faz um select * from Tabela
+#     # o ORM do Django busca as inf. no banco. esse comando internamente o Django faz um select * from Tabela
 #     #cars = Car.objects.filter(model__contains='p')
 #     search = request.GET.get('search')
 #     if search == None:
