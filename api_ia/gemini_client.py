@@ -1,6 +1,7 @@
 from google import genai
-import os
 from dotenv import load_dotenv
+import os
+
 
 
 # Carrega as variáveis do arquivo .env

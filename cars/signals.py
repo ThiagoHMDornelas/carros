@@ -1,6 +1,7 @@
 from django.db.models.signals import pre_save, pre_delete, post_save, post_delete
 from django.db.models import Sum
 from django.dispatch import receiver
+
 from cars.models import Car, CarInventory
 from api_ia.openai_client import get_car_openai_bio
 from api_ia.gemini_client import get_car_gemini_bio

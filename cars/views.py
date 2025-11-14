@@ -1,13 +1,28 @@
 #from django.shortcuts import render, redirect
-from cars.models import Car
-from django.urls import reverse_lazy
-from cars.forms import CarModelForm
 #from django.views import View
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.urls import reverse_lazy
+
+from cars.models import Car
+from cars.forms import CarModelForm
 
 
+
+class CarsListView(ListView):
+    model = Car
+    template_name = 'carros.html'
+    context_object_name = 'cars'
+
+    def get_queryset(self):
+        cars = super().get_queryset().order_by('model')
+        search = self.request.GET.get('search')
+        if search:
+            cars = cars.filter(model__icontains=search)
+
+        return cars
+    
 # def cars_view(request):
 #     #cars = Car.objects.all() 
 #     # o ORM do Django busca as inf. no banco. esse comando internamente o Django faz um select * from Tabela
@@ -33,18 +48,6 @@ from django.utils.decorators import method_decorator
 
 #         return render(request, 'carros.html', {'cars': cars})    
 
-class CarsListView(ListView):
-    model = Car
-    template_name = 'carros.html'
-    context_object_name = 'cars'
-
-    def get_queryset(self):
-        cars = super().get_queryset().order_by('model')
-        search = self.request.GET.get('search')
-        if search:
-            cars = cars.filter(model__icontains=search)
-
-        return cars
 
 
 class CarDetailView(DetailView):
