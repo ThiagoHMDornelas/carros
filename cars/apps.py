@@ -6,4 +6,4 @@ class CarsConfig(AppConfig):
     name = 'cars'
 
     def ready(self):
-        import cars.signals
+        import cars.signals  # noqa: F401

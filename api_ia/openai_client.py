@@ -3,9 +3,9 @@ from dotenv import load_dotenv
 import os
 
 
-
 # Carrega as variáveis do arquivo .env
 load_dotenv()
+
 
 def get_car_openai_bio(model, brand, year):
     # Pega a chave da variável de ambiente
@@ -13,7 +13,7 @@ def get_car_openai_bio(model, brand, year):
 
     if not api_key:
         raise ValueError("Chave da API não encontrada. Verifique seu arquivo .env")
-    
+
     # Inicializa cliente com a chave segura
     client = OpenAI(api_key=api_key)
 

@@ -91,7 +91,7 @@ DATABASES = {
         'PASSWORD': 'SENHA_REMOVIDA',
         'HOST': 'localhost',
         'PORT': '5432',
-    }    
+    }
 }
 
 DATABASE_ROUTERS = ['app.db_routers.SimpleRouter']

@@ -3,12 +3,12 @@ from mistralai import Mistral
 from dotenv import load_dotenv
 
 
-
 # Carrega as variáveis do arquivo .env
 load_dotenv()
 
+
 def get_car_mistralai_bio(model, brand, year):
-    #api_key = os.environ["MISTRAL_API_KEY"]
+    # api_key = os.environ["MISTRAL_API_KEY"]
     model = "mistral-large-latest"
 
     # Pega a chave da variável de ambiente
@@ -26,8 +26,8 @@ def get_car_mistralai_bio(model, brand, year):
     message = message.format(brand, model, year)
 
     chat_response = client.chat.complete(
-        model = model,
-        messages = [
+        model=model,
+        messages=[
             {
                 "role": "user",
                 "content": message,

@@ -26,7 +26,7 @@ def login_view(request):
             return redirect('lista_carros')
         else:
             login_form = AuthenticationForm()
-    else:   
+    else:
         login_form = AuthenticationForm()
 
     return render(request, 'login.html', {'login_form': login_form})

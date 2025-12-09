@@ -3,20 +3,20 @@ from dotenv import load_dotenv
 import os
 
 
-
 # Carrega as variáveis do arquivo .env
 load_dotenv()
 
+
 def get_car_gemini_bio(model, brand, year):
     # Inicializa cliente usando variável de ambiente
-    #client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+    # client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
     # Pega a chave da variável de ambiente
     api_key = os.getenv("GEMINI_API_KEY")
 
     if not api_key:
         raise ValueError("Chave da API não encontrada. Verifique seu arquivo .env")
-    
+
     # Inicializa cliente com a chave segura
     client = genai.Client(api_key=api_key)
 
@@ -33,4 +33,3 @@ def get_car_gemini_bio(model, brand, year):
     )
 
     return response.text.replace("## Descrição de Venda (250 caracteres)", "").strip()
-

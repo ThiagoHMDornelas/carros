@@ -1,5 +1,6 @@
 from django.conf import settings
 
+
 class SimpleRouter:
     """
     Roteia tudo para o banco definido no .env (ACTIVE_DB)

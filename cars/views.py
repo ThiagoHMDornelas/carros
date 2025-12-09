@@ -1,5 +1,5 @@
-#from django.shortcuts import render, redirect
-#from django.views import View
+# from django.shortcuts import render, redirect
+# from django.views import View
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -7,7 +7,6 @@ from django.urls import reverse_lazy
 
 from cars.models import Car
 from cars.forms import CarModelForm
-
 
 
 class CarsListView(ListView):
@@ -22,14 +21,14 @@ class CarsListView(ListView):
             cars = cars.filter(model__icontains=search)
 
         return cars
-    
+
 # def cars_view(request):
-#     #cars = Car.objects.all() 
+#     #cars = Car.objects.all()
 #     # o ORM do Django busca as inf. no banco. esse comando internamente o Django faz um select * from Tabela
 #     #cars = Car.objects.filter(model__contains='p')
 #     search = request.GET.get('search')
 #     if search == None:
-#         cars = Car.objects.all().order_by('model') 
+#         cars = Car.objects.all().order_by('model')
 #     else:
 #         cars = Car.objects.filter(model__icontains=search).order_by('model')
 
@@ -37,22 +36,21 @@ class CarsListView(ListView):
 
 # class CarsView(View):
 #     def get(self, request):
-#         #cars = Car.objects.all() 
+#         #cars = Car.objects.all()
 #         # o ORM do Django busca as inf. no bando. esse comando internamente o Django faz um select * from Tabela
 #         #cars = Car.objects.filter(model__contains='p')
 #         search = request.GET.get('search')
 #         if search == None:
-#             cars = Car.objects.all().order_by('model') 
+#             cars = Car.objects.all().order_by('model')
 #         else:
 #             cars = Car.objects.filter(model__icontains=search).order_by('model')
 
-#         return render(request, 'carros.html', {'cars': cars})    
-
+#         return render(request, 'carros.html', {'cars': cars})
 
 
 class CarDetailView(DetailView):
     template_name = 'carros_detalhe.html'
-    model = Car 
+    model = Car
 
 # def new_car_view(request):
 #     if request.method == 'POST':
@@ -76,9 +74,9 @@ class CarDetailView(DetailView):
 #         if new_car_form.is_valid():
 #             new_car_form.save()
 #             return redirect('lista_carros')
-        
-#         return render(request, 'novo_carro.html', {'new_car_form': new_car_form})    
-    
+
+#         return render(request, 'novo_carro.html', {'new_car_form': new_car_form})
+
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class NewCarCreateView(CreateView):
@@ -111,10 +109,10 @@ class CarUpdateView(UpdateView):
     model = Car
     form_class = CarModelForm
     template_name = 'carros_alterar.html'
-    
+
     def get_success_url(self):
         return reverse_lazy('detalhe_carro', kwargs={'pk': self.object.pk})
-    
+
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class CarDeleteView(DeleteView):
