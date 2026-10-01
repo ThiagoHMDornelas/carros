@@ -15,6 +15,7 @@ Aplicação web para catálogo e venda de carros, desenvolvida com Django. Permi
 - [Instalação e execução](#instalação-e-execução)
 - [Variáveis de ambiente](#variáveis-de-ambiente)
 - [Bancos de dados](#bancos-de-dados)
+- [Executar com Docker](#executar-com-docker)
 - [Testes](#testes)
 - [Principais rotas](#principais-rotas)
 - [Integração com IA](#integração-com-ia)
@@ -44,6 +45,7 @@ O **Carros** é uma aplicação web de catálogo e venda de veículos construíd
 - Pillow (upload de imagens)
 - SQLite e PostgreSQL
 - OpenAI, Google Gemini e MistralAI (integrações opcionais)
+- Docker e Docker Compose
 - flake8 (desenvolvimento)
 - GitHub Actions (CI)
 
@@ -57,6 +59,9 @@ carros/
 ├── api_ia/             # clientes de IA (OpenAI, Gemini, MistralAI)
 ├── media/              # uploads (imagens dos carros)
 ├── .github/workflows/  # pipeline de CI (GitHub Actions)
+├── Dockerfile
+├── docker-compose.yml
+├── .env.example        # exemplo de variáveis de ambiente
 ├── manage.py
 ├── requirements.txt
 └── requirements_dev.txt
@@ -106,10 +111,22 @@ A aplicação estará disponível em:
 
 ## Variáveis de ambiente
 
-Crie um arquivo `.env` na raiz do projeto com as variáveis:
+Copie o arquivo `.env.example` para `.env` e ajuste os valores:
+
+    # Django
+    SECRET_KEY=troque-por-uma-chave-secreta
+    DEBUG=True
+    ALLOWED_HOSTS=*
 
     # Banco de dados ativo: default (SQLite) ou postgresql
     ACTIVE_DB=default
+
+    # PostgreSQL (usado quando ACTIVE_DB=postgresql)
+    POSTGRES_DB=carros
+    POSTGRES_USER=postgres
+    POSTGRES_PASSWORD=
+    POSTGRES_HOST=localhost
+    POSTGRES_PORT=5432
 
     # Chaves de IA (opcionais, usadas para gerar a descrição dos carros)
     GEMINI_API_KEY=
@@ -124,6 +141,22 @@ O projeto pode rodar com dois bancos, alternados pela variável `ACTIVE_DB` no `
 - `postgresql` → PostgreSQL (servidor local na porta 5432)
 
 O roteamento entre os bancos é feito pelo `SimpleRouter` em `app/db_routers.py`.
+
+## Executar com Docker
+
+Com o Docker e o Docker Compose instalados, é possível subir a aplicação sem configurar o ambiente Python manualmente:
+
+    docker compose up --build
+
+A aplicação estará disponível em:
+
+    http://localhost:8000/
+
+Para parar e remover os containers:
+
+    docker compose down
+
+As migrações são aplicadas automaticamente na inicialização. O banco SQLite é criado dentro do container, então os dados não persistem após um `docker compose down`.
 
 ## Testes
 
