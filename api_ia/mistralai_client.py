@@ -1,19 +1,13 @@
 import os
-from mistralai import Mistral
+
 from dotenv import load_dotenv
+from mistralai import Mistral
 
-
-# Carrega as variáveis do arquivo .env
 load_dotenv()
 
 
 def get_car_mistralai_bio(model, brand, year):
-    # api_key = os.environ["MISTRAL_API_KEY"]
-    model = "mistral-large-latest"
-
-    # Pega a chave da variável de ambiente
     api_key = os.getenv("MISTRAL_API_KEY")
-
     if not api_key:
         raise ValueError("Chave da API não encontrada. Verifique seu arquivo .env")
 
@@ -26,7 +20,7 @@ def get_car_mistralai_bio(model, brand, year):
     message = message.format(brand, model, year)
 
     chat_response = client.chat.complete(
-        model=model,
+        model="mistral-large-latest",
         messages=[
             {
                 "role": "user",
