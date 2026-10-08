@@ -157,7 +157,7 @@ A forma recomendada de rodar a aplicação. O Docker Compose sobe o serviço já
 
 > **Importante:** o Docker Desktop sozinho **não** faz o setup inicial — ele é o *engine* e o painel de gerenciamento. Clonar o repositório e rodar `docker compose up --build` são feitos pelo **terminal**; o Docker Desktop é ótimo para acompanhar logs, iniciar/parar e abrir um terminal dentro do container **depois** que a stack subiu.
 
-> O Docker **não** precisa do arquivo `.env`: as variáveis já vêm definidas no `docker-compose.yml`. O `.env.example` é usado apenas na execução local (fora do Docker).
+> **Atenção:** neste projeto o `docker-compose.yml` usa `env_file: .env`, então o arquivo `.env` é **obrigatório** — sem ele o `docker compose up` falha. Crie-o no passo 2.
 
 ### Passo a passo (via shell / PowerShell)
 
@@ -170,13 +170,24 @@ cd carros
 
 > O `git clone` cria a pasta `carros` dentro da pasta atual, e o `cd` entra nela. Se você **já está dentro** da pasta do projeto, **pule o `cd`**.
 
-**2. Suba a stack.** Na primeira execução o Docker compila a imagem do projeto — pode levar alguns minutos:
+**2. Crie o arquivo de ambiente**
+
+```powershell
+copy .env.example .env        # Windows
+# cp .env.example .env        # Linux/macOS
+```
+
+> Atenção: se você **já tem** um `.env` na pasta, o comando acima vai **sobrescrevê-lo**. Nesse caso, **pule este passo** e apenas edite o `.env` existente.
+
+As chaves de IA (`OPENAI_API_KEY`, `GEMINI_API_KEY`, `MISTRAL_API_KEY`) são **opcionais**: sem elas o sistema funciona normalmente, apenas a geração de descrição por IA fica indisponível.
+
+**3. Suba a stack.** Na primeira execução o Docker compila a imagem do projeto — pode levar alguns minutos:
 
 ```powershell
 docker compose up --build -d
 ```
 
-**3. Confira os containers:**
+**4. Confira os containers:**
 
 ```powershell
 docker compose ps
@@ -188,20 +199,20 @@ Espere o serviço `web` como `Up`.
 |---|---|---|
 | `web` | 8000 | `http://localhost:8000` |
 
-**4. Acesse a aplicação:**
+**5. Acesse a aplicação:**
 
 - Aplicação: `http://localhost:8000/`
 - Painel administrativo: `http://localhost:8000/admin/`
 
 As migrações são aplicadas automaticamente na inicialização.
 
-**5. Crie o usuário administrador:**
+**6. Crie o usuário administrador:**
 
 ```powershell
 docker compose exec web python manage.py createsuperuser
 ```
 
-**6. Comandos úteis:**
+**7. Comandos úteis:**
 
 ```powershell
 docker compose logs -f web     # logs da aplicação
@@ -213,7 +224,7 @@ docker compose down            # para e remove os containers
 
 ### Usando o Docker Desktop (interface gráfica)
 
-Depois que a stack estiver no ar (passo 2), o Docker Desktop ajuda a operar. Na aba **Containers** você verá o serviço `web`:
+Depois que a stack estiver no ar (passo 3), o Docker Desktop ajuda a operar. Na aba **Containers** você verá o serviço `web`:
 
 - **Logs**: clique no container → aba *Logs* (equivale a `docker compose logs`).
 - **Start / Stop / Restart**: botões no topo do container.
