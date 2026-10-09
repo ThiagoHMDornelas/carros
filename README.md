@@ -7,9 +7,14 @@
 
 Aplicação web para catálogo e venda de carros, desenvolvida com Django. Permite listar e gerenciar carros e marcas, com autenticação de usuários, inventário automático e geração da descrição dos veículos com IA (OpenAI, Gemini ou MistralAI).
 
+![Catálogo de carros](docs/img/carros_list.png)
+
+*Catálogo de carros — listagem com busca por modelo.*
+
 ## Sumário
 
 - [Visão geral](#visão-geral)
+- [Telas do projeto](#telas-do-projeto)
 - [Funcionalidades](#funcionalidades)
 - [Tecnologias](#tecnologias)
 - [Estrutura do projeto](#estrutura-do-projeto)
@@ -26,6 +31,16 @@ Aplicação web para catálogo e venda de carros, desenvolvida com Django. Permi
 ## Visão geral
 
 O **Carros** é uma aplicação web de catálogo e venda de veículos construída com Django (templates e Class-Based Views). Visitantes podem consultar a lista e os detalhes dos carros; usuários autenticados podem cadastrar, alterar e remover carros. As marcas são gerenciadas por administradores no painel administrativo. O inventário é atualizado automaticamente a cada alteração e cada carro pode ter sua descrição gerada por IA.
+
+## Telas do projeto
+
+**Detalhe do carro** — informações do veículo e descrição gerada por IA:
+
+![Detalhe do carro](docs/img/carros_detail.png)
+
+**Login** — acesso de usuários:
+
+![Login](docs/img/carros_login.png)
 
 ## Funcionalidades
 
